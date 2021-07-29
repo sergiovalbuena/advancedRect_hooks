@@ -1,33 +1,45 @@
 import * as React from "react"
 import styled from "styled-components"
+import { useWindowSize } from "react-use"
 
 import PurchaseButton from "../components/buttons/PurchaseButton"
 import CourseCard from "../components/cards/CourseCard"
+import FlutterBuild from "../components/builds/FlutterBuild"
 
-const IndexPage = () => 
-    <Wrapper>
-      <HeroWrapper>
-      <CourseCard />
-      <TextWrapper>
-      <Logo src="/images/logos/react-logo.svg" alt="icon"/>
-      <Title>Build a web app with React Hooks</Title>
-      <Caption>20 sections - 3 hours of videos</Caption>
-      <Description>Learn how we build the new Design site with React Hooks</Description>
-      <AuthorWrapper>
-        <AuthorImage src="/images/avatars/Meng.png" alt="Meng Photo"/>
-        <Caption> Taught by Sanandaji</Caption>
-      </AuthorWrapper>
-      <PurchaseButton />
-      <SmallText>Purchase includes access to 30 courses, over 80 hours of content, incluiding 12 hours for SwiftUi and iOS14</SmallText>
-      </TextWrapper>
-      </HeroWrapper>
-    </Wrapper>
+const IndexPage = () => {
+
+  const {width} = useWindowSize()   
+  return(
+      <Wrapper>
+        <HeroWrapper>
+        <CourseCard />
+        <TextWrapper>
+        <Logo src="/images/logos/react-logo.svg" alt="icon"/>
+        <Title>Build a web app with React Hooks</Title>
+        <Caption>20 sections - 3 hours of videos</Caption>
+        <Description>Learn how we build the new Design site with React Hooks</Description>
+        <AuthorWrapper>
+          <AuthorImage src="/images/avatars/Meng.png" alt="Meng Photo"/>
+          <Caption> Taught by Sanandaji</Caption>
+        </AuthorWrapper>
+        <PurchaseButton />
+        <SmallText>Purchase includes access to 30 courses, over 80 hours of content, incluiding 12 hours for SwiftUi and iOS14</SmallText>
+        </TextWrapper>
+        </HeroWrapper>
+        <FlutterWrapper width={width}>
+          <FlutterBuild />
+        </FlutterWrapper>
+      </Wrapper>
+    )
+  }
+
 
 
 export default IndexPage
 
 const Wrapper = styled.div`
   background: linear-gradient(200.44deg, #4316db 13.57%, #9076e7 98.38%);
+  overflow: hidden;
 `
 
 const HeroWrapper = styled.div`
@@ -106,4 +118,12 @@ const SmallText = styled.p`
   font-size: 13px;
   line-height: 130%;
   color: whitesmoke;
+`
+const FlutterWrapper = styled.div`
+  margin: 100px auto;
+
+  @media (max-width: 1440px) {
+    transform-origin: top left;
+    transform: scale(${props => props.width / 1440});
+  }
 `
