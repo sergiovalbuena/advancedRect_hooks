@@ -1,4 +1,5 @@
 import * as React from "react"
+import {graphql} from 'gatsby'
 import styled from "styled-components"
 import { useWindowSize } from "react-use"
 
@@ -7,16 +8,21 @@ import CourseCard from "../components/cards/CourseCard"
 import FlutterBuild from "../components/builds/FlutterBuild"
 import GridSection from "../components/sections/GridSection"
 
-const IndexPage = () => {
 
-  const {width} = useWindowSize()   
+const IndexPage = ({data}) => {
+
+  const {width} = useWindowSize()
+  const title = data.allContentfulSection.edges[0].node.title
+  console.log(title)
+
+  console.log(data)   
   return(
       <Wrapper>
         <HeroWrapper>
         <CourseCard />
         <TextWrapper>
         <Logo src="/images/logos/react-logo.svg" alt="icon"/>
-        <Title>Build a web app with React Hooks</Title>
+        <Title>{title}</Title>
         <Caption>20 sections - 3 hours of videos</Caption>
         <Description>Learn how we build the new Design site with React Hooks</Description>
         <AuthorWrapper>
@@ -39,6 +45,21 @@ const IndexPage = () => {
 
 
 export default IndexPage
+
+export const query = graphql`
+  query IndexPageQuery
+    {
+  allContentfulSection {
+    edges {
+      node {
+        description
+        title
+        duration
+      }
+    }
+  }
+}
+`
 
 const Wrapper = styled.div`
   background: linear-gradient(200.44deg, #4316db 13.57%, #9076e7 98.38%);
