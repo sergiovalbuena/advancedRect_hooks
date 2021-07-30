@@ -1,19 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function SectionRow() {
+export default function SectionRow(props) {
+
+    const {index, title, description, timestamp} = props
+
     return (
     <Wrapper>
-        <Index>1</Index>
+        <Index>{index}</Index>
         <TextWrapper>
-            <Title>introduction to User Interface</Title>
+            <Title>{title}</Title>
             <ProgressBar />
             <Description>
-                Learn the fundations of UI and start design with me
+                {description}
             </Description>
 
         </TextWrapper>
-        <Timestamp>11:10</Timestamp>
+        <Timestamp>{timestamp}</Timestamp>
     </Wrapper>
     )
 }
@@ -22,7 +25,7 @@ const Wrapper = styled.div`
     position: relative;
     display: grid;
     grid-template-columns: 36px auto;
-    gap: 20px
+    gap: 20px;
     max-width: 360px;
     padding: 10px;
     background-blend-mode: overlay;
@@ -35,8 +38,7 @@ const Wrapper = styled.div`
 
     :hover{
         background: rgba(68,66,170,.1);
-        box-shadow: inset 0px 0px 0px .5px rgba(68,66,170,.2);
-
+        box-shadow: inset 0 0 0.5px rgba(68,66,170,.2);
     }
 `
 

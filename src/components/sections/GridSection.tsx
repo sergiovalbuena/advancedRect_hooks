@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import SectionRow from '../rows/SectionRow'
+import { sections } from '../../data/sectionData'
 
 export default function GridSection() {
     return(
@@ -9,10 +10,16 @@ export default function GridSection() {
             <Title>Title Name</Title>
             <Description>Description pharagraph</Description>
             <Grid>
-                <SectionRow />
-                <SectionRow />
-                <SectionRow />
-                <SectionRow />
+                {sections.map((section, index)=>(
+                    <SectionRow 
+                        key={index}
+                        index={index + 1}
+                        title={section.title}
+                        description={section.description}
+                        timestamp={section.duration}
+                    
+                    />
+                ))}
             </Grid>
         </Wrapper>
     )
@@ -44,6 +51,9 @@ const Description = styled.p`
 `
 
 const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 8px;
     width: 100%;
     padding: 20px;
     background: rgba(255,255,255,.5);
